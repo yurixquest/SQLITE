@@ -1,0 +1,34 @@
+== # Resumo SQLite # ==
+
+A ferramenta gráfica DBBROWSER cria o banco de dados de uma forma diferente: Novo banco de dados -> criar o arquivo do banco e então será aberta uma nova aba para criação de tabela
+As tabelas podem ser criadas pela ferramenta ou script. Basta dar o nome e adicionar os atributos em  "campos". A tabela sqlite_sequence é criada automaticamente para gerenciar os auto incrementos das tabelas,  ao navegar nos dados podemos ver o último id de cada tabela nesta tabela. Sempre que quiser salvar os dados  criados apertar em "Escrever modificações"
+
+Em "Executar SQL" podemos escrever o script diretamente. Nesta janela também temos o ícone de Play para executar o código, os erros são apresentados na parte inferior
+
+Na aba "Navegar dado" é possível verificar os registros inseridos nas tabelas, adicionar novos (lado direito)  ou remove-los, ou ainda filtra-los
+
+Diferenças quanto a SINTAXE em comparação ao PostgreSQL:
+1. Em vez de DECIMAL é REAL
+2. Valores REAL não precisam estar entre aspas
+3. Em vez de INT é INTERGER
+4. Em vez de VARCHAR() é TEXT
+5. AUTOINCREMENT é sem o underline
+6. Não existe o tipo DATA no SQLite (usar TEXT)
+7. É possível usar DROP TABLE mas não é possível usar DROP DATABASE, pois o DB pode ser deletado apagando diretamente o arquivo gerado no respectivo diretório.
+8. Não funcionam IGHT e FULL OUTER JOIN
+9. Diferente do PostgreSQL e semelhante ao MySQL os ALIAS no SQLite podem ser usados dentro de aspas (') simples ou não
+
+Tabelas que possuem relacionamentos entre uma e outra não podem ser deletadas. Apenas tabelas sem dependência podem ser deletadas. Ou seja, é possível apagar uma tabela que usa uma FK de outra tabela, mas não é possível deletar esta última pois está sendo usada como referência na primeira tabela.
+
+Para DCL (Data Control Language) não há os comando GRANT e REVOKE. Como é um arquivo salvo no disco, qualquer usuário com acesos ao arquivo terá acesso aos dados, pois o arquivo é o BD.
+
+Para comandos que usam as datas:
+SELECT DATE(); mostra a data atual
+SELECT TIME(); mostra hora atual baseada no padrão (normalmente dos USA)
+SELECT DATETIME(); mostra data e hora
+SELECT STFTIME('%d/%m/%Y') AS 'Data'; mostra de forma formatada a data
+SELECT STRTIME('%H:%M:%S') AS 'Hora; mostra a hora formatada
+SELECT DATETIME('now', 'localtime'); mostra a data e a hora no formato local (Brasil)
+SELECT TIME('now', 'localtime'); mostra a hora no formato local (Brasil)
+SELECT DATETIME(CURRENT_TIMESTAMP, 'localtime'); formato completo da data e hora
+
